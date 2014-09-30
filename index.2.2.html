@@ -12,8 +12,11 @@
 	   function dispmsg(msg) { 
 			var message = document.getElementById("taDisplay")  
 				message.value += msg+"\n";
-		}		
-	   
+		}
+		function dispScore(scr){ 
+			var score = document.getElemantById("taScore") 
+				score.value = scr;
+	    }
 	   function btnNorth_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 1
