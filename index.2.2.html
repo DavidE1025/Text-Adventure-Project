@@ -5,7 +5,7 @@
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta name="author" content="David Emory"> 
-		<title>David Emory's: The Four Year Mystery v0.2</title>
+		<title>David Emory's: The Four Years a Pirate v0.2</title>
 		  <!-- Still working on the title --> 
 	<script>
 	   var PlayerLoc = 0
@@ -20,11 +20,11 @@
 	   function btnNorth_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 1
-					dispmsg("You are a douche.")
+					dispmsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.")
 			    } else {
 					if (PlayerLoc === 3){
 						PlayerLoc = 0 
-						dispmsg("You are Standing in a field.")
+						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ")
 						} else { 
 							dispmsg("Stop, you cannot go that way.")
 							}
@@ -33,11 +33,11 @@
 	    function btnSouth_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 3
-					dispmsg("You are a balls.")
+					dispmsg("You reach a bridge. It is destroyed and you have no other direction to go.")
 			    } else { 
 					if (PlayerLoc === 1){ 
 						PlayerLoc = 0 
-						dispmsg("You are standing in a feild.") 
+						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ") 
 					} else { 
 						dispmsg("Stop, you cannot go that way.") 
 						}
@@ -46,28 +46,23 @@
 		function btnWest_Click(){	   
 			   if (PlayerLoc === 2) { 
 			       PlayerLoc = 0
-					dispmsg("You are a butt.")
+					dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ")
 				} else { 
 					dispmsg("Stop, you cannot go that way.")
 			    }	
 	    }
 		function btnEast_Click(){	   
 			   if (PlayerLoc === 0) { 
-			       PlayerLoc = 4
-					dispmsg("Stop, You are not allowed to go that way.")
+			       PlayerLoc = 2
+					dispmsg("The mountain towers over you as you approach. There is a path that leads up the mountain.")
 			    } else { 
-					if (PlayerLoc === 0){
-						PlayerLoc = 2 
-						 dispmsg("You are standing in a field.")
-					} else { 
-						dispmsg("Shut up bitch and ride this dick.")	
+					dispmsg("Stop you cannot go that way.")	
 		            }
-				}	
-		}		
+		}			
 	</script>
 	<body>
-		<h1> The Four Year Mystery v0.2 </h1>
-		<textarea rows="20"  cols="60" id="taDisplay">You are standing in a field.
+		<h1> The Four Years a Pirate  v0.2 </h1>
+		<textarea rows="20"  cols="60" id="taDisplay">You are standing on a beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. 
 </textarea>
 		<br>
 		<input type = "button"
