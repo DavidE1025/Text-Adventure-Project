@@ -9,45 +9,32 @@
 		  <!-- Still working on the title --> 
 	<script>
 	   var PlayerLoc = 0;
-	   var scr = 0;
-	   var loc_0 = false ;
+	   var score = 0;
+	   var loc_0 = false;
 	   var loc_1 = false;
 	   var loc_2 = false; 
-	   var loc_3 = false; 
+	   var loc_3 = false;
+	   var loc_4 = false; 
 	   function dispmsg(msg) { 
 			var message = document.getElementById("taDisplay");  
 				message.value += msg+"\n\n";
-		}
-		function checkScore () {
-			if (loc_0===false){
-				score += 5 
-				dispScore ();
-			} else { 	
-			if (loc_1===false){
-				score += 5 
-				dispScore ();
-			} else { 	
-			if (loc_2===false){
-				score += 5 
-				dispScore ();
-			} else {
-			if (loc_3===false){
-				score += 5 
-				dispScore ();
-			} 	
-		}		
+		}	
 		function dispScore(){ 
 			var targetScore = document.getElementById("taScore"); 
-				targetScore.value = scr; 
+				targetScore.value = score; 
 	    }
 	   function btnNorth_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 1
+					if(loc_1 === false){ 
+					   loc_1 = true ;
+					   score += 5; 
+					   dispScore(); 
+					}
 					dispmsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.");
-					checkScore();
 				} else {
 					if (PlayerLoc === 3){
-						PlayerLoc = 0 
+						PlayerLoc = 0; 
 						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 					} else { 
 						dispmsg("Stop, you cannot go that way."); 
@@ -56,33 +43,58 @@
 		}
 	    function btnSouth_Click(){	   
 			   if (PlayerLoc === 0) { 
-			       PlayerLoc = 3
+			       PlayerLoc = 3;
+				   if(loc_3 === false){ 
+					   loc_3 = true ;
+					   score += 5; 
+					   dispScore();
 					dispmsg("You reach a bridge. It is destroyed and you have no other direction to go.");
-			    } else { 
+					}
+				} else { 
 					if (PlayerLoc === 1){ 
-						PlayerLoc = 0 
+						PlayerLoc = 0; 
 						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
 					} else { 
 						dispmsg("Stop, you cannot go that way."); 
 						}
 				}
 		}		
-		function btnWest_Click(){	   
+		function btnWest_Click(){
+			if (PlayerLoc === 0 ){
+				PlayerLoc = 4;
+					if(loc_4 === false){ 
+					   loc_4 = true ;
+					   score += 5; 
+					   dispScore();
+					}
+				dispmsg("You walk onto your ship, but it is of no use with out the sail.");
+			} else {   
 			   if (PlayerLoc === 2) { 
-			       PlayerLoc = 0
+			       PlayerLoc = 0;
 					dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 				} else { 
 					dispmsg("Stop, you cannot go that way.");
 			    }	
-	    }
+			}
+		}	
 		function btnEast_Click(){	   
 			   if (PlayerLoc === 0) { 
-			       PlayerLoc = 2
+			       PlayerLoc = 2;
+				   if(loc_2 === false){ 
+					   loc_2 = true ;
+					   score += 5; 
+					   dispScore();
+					}   
 					dispmsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
-			    } else { 
-					dispmsg("Stop you cannot go that way.");	
+				} else { 
+					if (PlayerLoc === 4){ 
+						PlayerLoc = 0 ;
+						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south.");
+					} else { 
+						dispmsg("Stop you cannot go that way.");	
 		            }
-		}			
+				}	
+		}		
 	</script>
 	<body>
 		<h1> The Four Years a Pirate  v0.2 </h1>
@@ -110,7 +122,7 @@
 			   onclick = "btnWest_Click();" />
 		<p> Score
 		<br>
-		<textarea rows="1" cols= "5" id="taScore"></textarea>
+		<textarea rows="1" cols= "5" id="taScore" readonly></textarea>
 		</p>
 		<p> Having Issues? 
 		<a href="mailto:david.emory@marist.edu"> Click Here </a> 
