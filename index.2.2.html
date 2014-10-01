@@ -17,6 +17,8 @@
 	   var loc_4 = false; 
 	   function dispmsg(msg) { 
 			var message = document.getElementById("taDisplay");  
+				message.scrollTop = message.scrollHeight
+			// Above found on http://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated
 				message.value += msg+"\n\n";
 		}	
 		function dispScore(){ 
