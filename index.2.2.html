@@ -8,61 +8,85 @@
 		<title>David Emory's: The Four Years a Pirate v0.2</title>
 		  <!-- Still working on the title --> 
 	<script>
-	   var PlayerLoc = 0
+	   var PlayerLoc = 0;
+	   var scr = 0;
+	   var loc_0 = false ;
+	   var loc_1 = false;
+	   var loc_2 = false; 
+	   var loc_3 = false; 
 	   function dispmsg(msg) { 
-			var message = document.getElementById("taDisplay")  
-				message.value += msg+"\n";
+			var message = document.getElementById("taDisplay");  
+				message.value += msg+"\n\n";
 		}
-		function dispScore(scr){ 
-			var score = document.getElemantById("taScore") 
-				score.value = scr;
+		function checkScore () {
+			if (loc_0===false){
+				score += 5 
+				dispScore ();
+			} else { 	
+			if (loc_1===false){
+				score += 5 
+				dispScore ();
+			} else { 	
+			if (loc_2===false){
+				score += 5 
+				dispScore ();
+			} else {
+			if (loc_3===false){
+				score += 5 
+				dispScore ();
+			} 	
+		}		
+		function dispScore(){ 
+			var targetScore = document.getElementById("taScore"); 
+				targetScore.value = scr; 
 	    }
 	   function btnNorth_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 1
-					dispmsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.")
-			    } else {
+					dispmsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.");
+					checkScore();
+				} else {
 					if (PlayerLoc === 3){
 						PlayerLoc = 0 
-						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ")
-						} else { 
-							dispmsg("Stop, you cannot go that way.")
-							}
-	            }
-		}		
+						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
+					} else { 
+						dispmsg("Stop, you cannot go that way."); 
+					}
+				}
+		}
 	    function btnSouth_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 3
-					dispmsg("You reach a bridge. It is destroyed and you have no other direction to go.")
+					dispmsg("You reach a bridge. It is destroyed and you have no other direction to go.");
 			    } else { 
 					if (PlayerLoc === 1){ 
 						PlayerLoc = 0 
-						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ") 
+						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
 					} else { 
-						dispmsg("Stop, you cannot go that way.") 
+						dispmsg("Stop, you cannot go that way."); 
 						}
 				}
 		}		
 		function btnWest_Click(){	   
 			   if (PlayerLoc === 2) { 
 			       PlayerLoc = 0
-					dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ")
+					dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 				} else { 
-					dispmsg("Stop, you cannot go that way.")
+					dispmsg("Stop, you cannot go that way.");
 			    }	
 	    }
 		function btnEast_Click(){	   
 			   if (PlayerLoc === 0) { 
 			       PlayerLoc = 2
-					dispmsg("The mountain towers over you as you approach. There is a path that leads up the mountain.")
+					dispmsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
 			    } else { 
-					dispmsg("Stop you cannot go that way.")	
+					dispmsg("Stop you cannot go that way.");	
 		            }
 		}			
 	</script>
 	<body>
 		<h1> The Four Years a Pirate  v0.2 </h1>
-		<textarea rows="20"  cols="60" id="taDisplay">You are standing on a beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. 
+		<textarea rows="20"  cols="60" id="taDisplay" readonly>You are standing on a beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. 
 </textarea>
 		<br>
 		<input type = "button"
@@ -84,7 +108,8 @@
 			   value = "West"
 			   id    = "btnWest"
 			   onclick = "btnWest_Click();" />
-		<p> Score: 	   
+		<p> Score
+		<br>
 		<textarea rows="1" cols= "5" id="taScore"></textarea>
 		</p>
 		<p> Having Issues? 
@@ -94,6 +119,4 @@
 		<a href="http://validator.w3.org/#validate_by_input"> Validate </a>	
 		</p>
 	</body>
-
-
 </html>
