@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<!-- David A. Emory 
+			10/02/2014
 			Text Adventure Game v0.2 -->
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -8,14 +9,13 @@
 		<title>David Emory's: The Four Years a Pirate v0.2</title>
 		  <!-- Still working on the title --> 
 	<script>
-	   var PlayerLoc = 0;
+	   var playerLoc = 0;
 	   var score = 0;
-	   var loc_0 = false;
 	   var loc_1 = false;
 	   var loc_2 = false; 
 	   var loc_3 = false;
 	   var loc_4 = false; 
-	   function dispmsg(msg) { 
+	   function dispMsg(msg) { 
 			var message = document.getElementById("taDisplay");  
 				message.scrollTop = message.scrollHeight
 			// Above found on http://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated
@@ -25,75 +25,78 @@
 			var targetScore = document.getElementById("taScore"); 
 				targetScore.value = score; 
 	    }
-	   function btnNorth_Click(){	   
-			   if (PlayerLoc === 0) { 
-			       PlayerLoc = 1
+	   function btnNorth_Click(){	  
+	  // switch(playerLoc){
+	  // case 0:
+      //  playerLoc = 1;
+			   if (playerLoc === 0) { 
+			       playerLoc = 1
 					if(loc_1 === false){ 
 					   loc_1 = true ;
 					   score += 5; 
 					   dispScore(); 
 					}
-					dispmsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.");
+					dispMsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.");
 				} else {
-					if (PlayerLoc === 3){
-						PlayerLoc = 0; 
-						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
+					if (playerLoc === 3){
+						playerLoc = 0; 
+						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 					} else { 
-						dispmsg("Stop, you cannot go that way."); 
+						dispMsg("Stop, you cannot go that way."); 
 					}
 				}
 		}
 	    function btnSouth_Click(){	   
-			   if (PlayerLoc === 0) { 
-			       PlayerLoc = 3;
+			   if (playerLoc === 0) { 
+			       playerLoc = 3;
 				   if(loc_3 === false){ 
 					   loc_3 = true ;
 					   score += 5; 
 					   dispScore();
-					dispmsg("You reach a bridge. It is destroyed and you have no other direction to go.");
+					dispMsg("You reach a bridge. It is destroyed and you have no other direction to go.");
 					}
 				} else { 
-					if (PlayerLoc === 1){ 
-						PlayerLoc = 0; 
-						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
+					if (playerLoc === 1){ 
+						playerLoc = 0; 
+						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
 					} else { 
-						dispmsg("Stop, you cannot go that way."); 
+						dispMsg("Stop, you cannot go that way."); 
 						}
 				}
 		}		
 		function btnWest_Click(){
-			if (PlayerLoc === 0 ){
-				PlayerLoc = 4;
+			if (playerLoc === 0 ){
+				playerLoc = 4;
 					if(loc_4 === false){ 
 					   loc_4 = true ;
 					   score += 5; 
 					   dispScore();
 					}
-				dispmsg("You walk onto your ship, but it is of no use with out the sail.");
+				dispMsg("You walk onto your ship, but it is of no use with out the sail.");
 			} else {   
-			   if (PlayerLoc === 2) { 
-			       PlayerLoc = 0;
-					dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
+			   if (playerLoc === 2) { 
+			       playerLoc = 0;
+					dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 				} else { 
-					dispmsg("Stop, you cannot go that way.");
+					dispMsg("Stop, you cannot go that way.");
 			    }	
 			}
 		}	
 		function btnEast_Click(){	   
-			   if (PlayerLoc === 0) { 
-			       PlayerLoc = 2;
+			   if (playerLoc === 0) { 
+			       playerLoc = 2;
 				   if(loc_2 === false){ 
 					   loc_2 = true ;
 					   score += 5; 
 					   dispScore();
 					}   
-					dispmsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
+					dispMsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
 				} else { 
-					if (PlayerLoc === 4){ 
-						PlayerLoc = 0 ;
-						dispmsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south.");
+					if (playerLoc === 4){ 
+						playerLoc = 0 ;
+						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south.");
 					} else { 
-						dispmsg("Stop you cannot go that way.");	
+						dispMsg("Stop you cannot go that way.");	
 		            }
 				}	
 		}		
@@ -103,24 +106,33 @@
 		<textarea rows="20"  cols="60" id="taDisplay" readonly>You are standing on a beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. 
 </textarea>
 		<br>
-		<input type = "button"
-			   value = "North" 
-			   id    = "btnNorth" 
+		<input type = "button"; 
+           id   = "btnGo";
+           value = "Go" ;
+           onclick = "btnGo_Click()";/> 
+           
+		<input type = "text";
+           id   = "txtCommmand";
+           placeholder = "Enter Your Command"/>
+          <br/>
+		<input type = "button";
+			   value = "North"; 
+			   id    = "btnNorth"; 
 			   onclick = "btnNorth_Click();" /> 
 			   
-		<input type = "button" 
-			   value = "South"
-			   id    = "btnSouth" 
+		<input type = "button"; 
+			   value = "South";
+			   id    = "btnSouth"; 
 			   onclick = "btnSouth_Click();" />
 			   
-		<input type = "button" 
-			   value = "East"
-			   id    = "btnEast" 
+		<input type = "button"; 
+			   value = "East";
+			   id    = "btnEast"; 
 			   onclick = "btnEast_Click();" /> 
 			   
-		<input type = "button" 
-			   value = "West"
-			   id    = "btnWest"
+		<input type = "button"; 
+			   value = "West";
+			   id    = "btnWest";
 			   onclick = "btnWest_Click();" />
 		<p> Score
 		<br>
