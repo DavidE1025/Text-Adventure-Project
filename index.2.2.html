@@ -2,107 +2,123 @@
 <html>
 	<!-- David A. Emory 
 			10/02/2014
-			Text Adventure Game v0.2 -->
+			Text Adventure Game v0.4 -->
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta name="author" content="David Emory"> 
-		<title>David Emory's: The Four Years a Pirate v0.2</title>
+		<title>David Emory's: The Four Years a Pirate v0.4</title>
 		  <!-- Still working on the title --> 
 	<script>
-	   var playerLoc = 0;
-	   var score = 0;
-	   var loc_1 = false;
-	   var loc_2 = false; 
-	   var loc_3 = false;
-	   var loc_4 = false; 
-	   function dispMsg(msg) { 
-			var message = document.getElementById("taDisplay");  
-				message.scrollTop = message.scrollHeight
+	// Player location and Point scoring variables 
+	  var playerLoc = 0;
+	  var score = 0;
+	//Map Location 
+	  var visitedLoc_1 = false;
+	  var visitedLoc_2 = false; 
+	  var visitedLoc_3 = false;
+	  var visitedLoc_4 = false; 
+	   
+	   //Display Text 
+	  function dispMsg(msg) { 
+			  var message = document.getElementById("taDisplay");  
+				    message.scrollTop = message.scrollHeight
 			// Above found on http://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated
 				message.value += msg+"\n\n";
 		}	
+		//Display Score 
 		function dispScore(){ 
 			var targetScore = document.getElementById("taScore"); 
 				targetScore.value = score; 
-	    }
-	   function btnNorth_Click(){	  
-	  // switch(playerLoc){
-	  // case 0:
-      //  playerLoc = 1;
-			   if (playerLoc === 0) { 
-			       playerLoc = 1
-					if(loc_1 === false){ 
-					   loc_1 = true ;
-					   score += 5; 
-					   dispScore(); 
-					}
+	  }
+	  //Score Counter 
+	  //Tutored by Chritian Menk 
+	  function scrCounter(){
+          if (visitedLoc_1 === false && playerLoc === 1){
+              visitedLoc_1 = true; 
+              score += 5; 
+              dispScore(); 
+          }
+          if (visitedLoc_2 === false && playerLoc === 2){
+              visitedLoc_2 = true; 
+              score += 5;  
+              dispScore();
+          }
+          if (visitedLoc_3 === false && playerLoc === 3){ 
+              visitedLoc_3 = true; 
+              score += 5;
+              dispScore();
+          }
+          if (visitedLoc_4 === false && playerLoc === 4){ 
+              visitedLoc_4 = true; 
+              score += 5 
+              dispScore(); 
+          }          
+    }    
+	  //Functions for buttons 
+	  function btnNorth_Click(){	  
+	     switch(playerLoc){
+	       case 0:
+          playerLoc = 1;
+          scrCounter(); 
 					dispMsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.");
-				} else {
-					if (playerLoc === 3){
+				 break; 
+				 case 3:
 						playerLoc = 0; 
 						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
-					} else { 
+				 break;
+				 default:   
 						dispMsg("Stop, you cannot go that way."); 
-					}
-				}
-		}
+		    }
+		}   
 	    function btnSouth_Click(){	   
-			   if (playerLoc === 0) { 
-			       playerLoc = 3;
-				   if(loc_3 === false){ 
-					   loc_3 = true ;
-					   score += 5; 
-					   dispScore();
-					dispMsg("You reach a bridge. It is destroyed and you have no other direction to go.");
-					}
-				} else { 
-					if (playerLoc === 1){ 
-						playerLoc = 0; 
-						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
-					} else { 
-						dispMsg("Stop, you cannot go that way."); 
-						}
-				}
-		}		
-		function btnWest_Click(){
-			if (playerLoc === 0 ){
-				playerLoc = 4;
-					if(loc_4 === false){ 
-					   loc_4 = true ;
-					   score += 5; 
-					   dispScore();
-					}
-				dispMsg("You walk onto your ship, but it is of no use with out the sail.");
-			} else {   
-			   if (playerLoc === 2) { 
-			       playerLoc = 0;
-					dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
-				} else { 
-					dispMsg("Stop, you cannot go that way.");
-			    }	
-			}
-		}	
+			   switch(playerLoc){
+			       case 0: 
+			         playerLoc = 3;
+					     scrCounter(); 
+					     dispMsg("You reach a bridge. It is destroyed and you have no other direction to go.");
+			       break;  
+				     case 1:  
+						   playerLoc = 0; 
+						   dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
+					   break;
+					   default:  
+               dispMsg("Stop, you cannot go that way."); 
+		      }	
+		  } 
 		function btnEast_Click(){	   
-			   if (playerLoc === 0) { 
-			       playerLoc = 2;
-				   if(loc_2 === false){ 
-					   loc_2 = true ;
-					   score += 5; 
-					   dispScore();
-					}   
-					dispMsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
-				} else { 
-					if (playerLoc === 4){ 
-						playerLoc = 0 ;
-						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south.");
-					} else { 
-						dispMsg("Stop you cannot go that way.");	
-		            }
+			  switch(playerLoc) { 
+			      case 0: 
+			        playerLoc = 2;
+			        scrCounter(); 
+					    dispMsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
+            break; 
+					  case 4:
+						  playerLoc = 0;
+						  dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south.");
+					  break;
+					  default:  
+						  dispMsg("Stop you cannot go that way.");	
 				}	
-		}		
+		}	  	
+		function btnWest_Click(){
+			  switch(playerLoc){
+				    case 0:
+				      playerLoc = 4
+				      scrCounter();
+				      dispMsg("You walk onto your ship, but it is of no use with out the sail.");
+			      break;
+			      case 2:   
+			        playerLoc = 0;
+					    dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
+				    break;
+				    default: 
+					    dispMsg("Stop, you cannot go that way.");
+			  }		
+		}	
+
 	</script>
-	<body>
-		<h1> The Four Years a Pirate  v0.2 </h1>
+	<body style = "text-align: center" >
+		<h1> The Four Years a Pirate  v0.4 </h1>
 		<textarea rows="20"  cols="60" id="taDisplay" readonly>You are standing on a beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. 
 </textarea>
 		<br>
@@ -126,14 +142,14 @@
 			   onclick = "btnSouth_Click();" />
 			   
 		<input type = "button"; 
-			   value = "East";
-			   id    = "btnEast"; 
-			   onclick = "btnEast_Click();" /> 
-			   
-		<input type = "button"; 
 			   value = "West";
 			   id    = "btnWest";
 			   onclick = "btnWest_Click();" />
+		
+		<input type = "button"; 
+			   value = "East";
+			   id    = "btnEast"; 
+			   onclick = "btnEast_Click();" /> 
 		<p> Score
 		<br>
 		<textarea rows="1" cols= "5" id="taScore" readonly></textarea>
