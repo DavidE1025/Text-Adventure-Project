@@ -6,33 +6,44 @@
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta name="author" content="David Emory"> 
-		<title>David Emory's: The Four Years a Pirate v0.4</title>
+		<title>David Emory's: Treasure on Ghost Island  v0.4</title>
 		  <!-- Still working on the title --> 
 	<script>
 	// Player location and Point scoring variables 
 	  var playerLoc = 0;
 	  var score = 0;
-	//Map Location 
+	  
+	//Visited Location 
+	  var visitedLoc_0 = false;
 	  var visitedLoc_1 = false;
 	  var visitedLoc_2 = false; 
 	  var visitedLoc_3 = false;
 	  var visitedLoc_4 = false; 
-	   
-	   //Display Text 
+	  var visitedLoc_5 = false;
+	  var visitedLoc_6 = false; 
+  
+	//Display Text 
 	  function dispMsg(msg) { 
 			  var message = document.getElementById("taDisplay");  
 				    message.scrollTop = message.scrollHeight
 			// Above found on http://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated
 				message.value += msg+"\n\n";
 		}	
-		//Display Score 
+		//Display Score
+		 
 		function dispScore(){ 
 			var targetScore = document.getElementById("taScore"); 
 				targetScore.value = score; 
 	  }
-	  //Score Counter 
-	  //Tutored by Chritian Menk 
+	  
+	  //Score Counter
+	    
 	  function scrCounter(){
+          if (visitedLoc_0 === false && playerLoc === 0){ 
+              visitedLoc_0 = true; 
+              score += 5 
+              dispScore(); 
+          } 
           if (visitedLoc_1 === false && playerLoc === 1){
               visitedLoc_1 = true; 
               score += 5; 
@@ -52,18 +63,48 @@
               visitedLoc_4 = true; 
               score += 5 
               dispScore(); 
-          }          
+          }
+          if (visitedLoc_5 === false && playerLoc === 5){ 
+              visitedLoc_5 = true; 
+              score += 5 
+              dispScore(); 
+          }
+          if (visitedLoc_6 === false && playerLoc === 6){ 
+              visitedLoc_6 = true; 
+              score += 5 
+              dispScore(); 
+          }         
     }    
-	  //Functions for buttons 
+    function btnGo_Click(){
+        var targetCommand = document.getElementById("txtCommand")
+        if (targetCommand = "N" ){ 
+            btnNorth_Click()     
+        }
+    
+    }
+
+	  //onload function 
+	  
+	  function location_Onload() {
+       switch(playerLoc){
+          case 0: 
+            playerLoc = 0; 
+            scrCounter();
+            dispMsg("You are currently on your ship. You have landed on a beach in search of treasure said to be on the island. The only possible way to go is to the east on to the beach as there is ocean all around you.");
+       }
+    }
+    
+    //Functions for buttons        
+           
 	  function btnNorth_Click(){	  
 	     switch(playerLoc){
-	       case 0:
-          playerLoc = 1;
+	       case 1:
+          playerLoc = 3;
           scrCounter(); 
 					dispMsg("You walk into the forest. It is dark in every direction and you can hear noises of creatures in the distance.");
 				 break; 
-				 case 3:
-						playerLoc = 0; 
+				 case 2:
+						playerLoc = 1; 
 						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 				 break;
 				 default:   
@@ -72,13 +113,13 @@
 		}   
 	    function btnSouth_Click(){	   
 			   switch(playerLoc){
-			       case 0: 
-			         playerLoc = 3;
+			       case 1: 
+			         playerLoc = 2;
 					     scrCounter(); 
 					     dispMsg("You reach a bridge. It is destroyed and you have no other direction to go.");
 			       break;  
-				     case 1:  
-						   playerLoc = 0; 
+				     case 3:  
+						   playerLoc = 1; 
 						   dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
 					   break;
 					   default:  
@@ -88,27 +129,27 @@
 		function btnEast_Click(){	   
 			  switch(playerLoc) { 
 			      case 0: 
-			        playerLoc = 2;
+			        playerLoc = 1;
 			        scrCounter(); 
-					    dispMsg("The mountain towers over you as you approach. There is a path that leads up the mountain.");
+					    dispMsg("You walk east onto the beach. To the north there is a forset, to the south a bridge, to the east a mountian, and back to the west is your ship.");
             break; 
-					  case 4:
-						  playerLoc = 0;
-						  dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south.");
+					  case 1:
+						  playerLoc = 4;
+						  dispMsg("You head east the mountain looms over head as you approach it. There is a path to the north leading up the mountain and a path to the east into a cave.");
 					  break;
 					  default:  
-						  dispMsg("Stop you cannot go that way.");	
+						  dispMsg("Stop, you cannot go that way.");	
 				}	
 		}	  	
 		function btnWest_Click(){
 			  switch(playerLoc){
-				    case 0:
-				      playerLoc = 4
+				    case 1:
+				      playerLoc = 0;
 				      scrCounter();
-				      dispMsg("You walk onto your ship, but it is of no use with out the sail.");
+				      dispMsg("You walk west onto your ship. You cannot leave without the treasure!");
 			      break;
-			      case 2:   
-			        playerLoc = 0;
+			      case 4:   
+			        playerLoc = 1;
 					    dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 				    break;
 				    default: 
@@ -117,10 +158,9 @@
 		}	
 
 	</script>
-	<body style = "text-align: center" >
-		<h1> The Four Years a Pirate  v0.4 </h1>
-		<textarea rows="20"  cols="60" id="taDisplay" readonly>You are standing on a beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. 
-</textarea>
+	<body onload = "location_Onload()"; style = "text-align: center" >
+		<h1> Treasure on Ghost Island  v0.4 </h1>
+		<textarea rows="20"  cols="60" id="taDisplay" readonly> </textarea>
 		<br>
 		<input type = "button"; 
            id   = "btnGo";
