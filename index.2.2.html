@@ -25,7 +25,7 @@
 	//Display Text 
 	  function dispMsg(msg) { 
 			  var message = document.getElementById("taDisplay");  
-				    message.scrollTop = message.scrollHeight
+				    message.scrollTop = message.scrollHeight;
 			// Above found on http://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated
 				message.value += msg+"\n\n";
 		}	
@@ -76,9 +76,24 @@
           }         
     }    
     function btnGo_Click(){
-        var targetCommand = document.getElementById("txtCommand")
-        if (targetCommand = "N" ){ 
-            btnNorth_Click()     
+        var targetCommand = document.getElementById("txtCommand");
+        var userInput = targetCommand.value;
+        userInput = userInput.toUpperCase();
+        switch(userInput){
+          case 'N':
+            dirNorth();
+          break;
+          case 'S':
+            dirSouth();
+          break;
+          case 'W': 
+            dirWest(); 
+          break;
+          case 'E': 
+            dirEast();
+          break;
+          default: 
+            dispMsg("Command Not Recognized. Use N,S,E,W, or n,s,e,w."); 
         }
     
     }
@@ -94,9 +109,9 @@
        }
     }
     
-    //Functions for buttons        
+    //Directional Functions         
            
-	  function btnNorth_Click(){	  
+	  function dirNorth(){	  
 	     switch(playerLoc){
 	       case 1:
           playerLoc = 3;
@@ -107,26 +122,44 @@
 						playerLoc = 1; 
 						dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
 				 break;
+				 case 4:  
+						playerLoc = 5;
+						scrCounter();  
+						dispMsg("You walk north up the mountain and arrive at the summit. You can see the entire island. Past the bridge to the south of the beach you can see a mansion, on the other side of the mountain there is what looks to be a temple surrounded by a forest, and back the west you can see your ship."); 
+				 break;
+				 case 7:
+						playerLoc = 2; 
+						dispMsg("You head north back across the bridge the water river hasn't slowed a bit. The beach is to the north and the mansion back to the south.");
+				 break;
 				 default:   
 						dispMsg("Stop, you cannot go that way."); 
 		    }
 		}   
-	    function btnSouth_Click(){	   
+	    function dirSouth(){	   
 			   switch(playerLoc){
 			       case 1: 
 			         playerLoc = 2;
 					     scrCounter(); 
-					     dispMsg("You reach a bridge. It is destroyed and you have no other direction to go.");
-			       break;  
+					     dispMsg("You reach a bridge, across the bridge in the distance you can see a mansion.");
+			       break;
+			       case 2: 
+			         playerLoc = 7;
+					     scrCounter(); 
+					     dispMsg("You walk across the bridge the river underneath is running fast if you were to fall in it would be over. You have arrived at the mansion in the south. The front door is broken and the building looks abandoned."); 
+				     break;
 				     case 3:  
 						   playerLoc = 1; 
 						   dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
 					   break;
+					   case 5:  
+						   playerLoc = 4; 
+						   dispMsg("You head south back down the mountian path. You arrive at the base of the mountain. The beach is to the west aand the cave to the east.");
+						 break;    
 					   default:  
                dispMsg("Stop, you cannot go that way."); 
 		      }	
 		  } 
-		function btnEast_Click(){	   
+		function dirEast(){	   
 			  switch(playerLoc) { 
 			      case 0: 
 			        playerLoc = 1;
@@ -135,22 +168,31 @@
             break; 
 					  case 1:
 						  playerLoc = 4;
+						  scrCounter(); 
 						  dispMsg("You head east the mountain looms over head as you approach it. There is a path to the north leading up the mountain and a path to the east into a cave.");
+					  break;
+            case 4:
+						  playerLoc = 6;
+						  scrCounter(); 
+						  dispMsg("You attempt to head into the cave but it is to dark to continue, you need some source of light.");					  
 					  break;
 					  default:  
 						  dispMsg("Stop, you cannot go that way.");	
 				}	
 		}	  	
-		function btnWest_Click(){
+		function dirWest(){
 			  switch(playerLoc){
 				    case 1:
 				      playerLoc = 0;
-				      scrCounter();
 				      dispMsg("You walk west onto your ship. You cannot leave without the treasure!");
 			      break;
 			      case 4:   
 			        playerLoc = 1;
 					    dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. ");
+				    break;
+				    case 6:   
+			        playerLoc = 4;
+					    dispMsg("The light is extremely bright after you walk back out of the cave. Back at the base of the mountain there is a path up the mountain to the north and back to the west is the beach."); 
 				    break;
 				    default: 
 					    dispMsg("Stop, you cannot go that way.");
@@ -159,37 +201,39 @@
 
 	</script>
 	<body onload = "location_Onload()"; style = "text-align: center" >
-		<h1> Treasure on Ghost Island  v0.4 </h1>
+		<h1> The Adventures of Captain Something: Treasure on YAY Island v0.4 </h1>
 		<textarea rows="20"  cols="60" id="taDisplay" readonly> </textarea>
 		<br>
 		<input type = "button"; 
            id   = "btnGo";
            value = "Go" ;
-           onclick = "btnGo_Click()";/> 
+           onclick = "btnGo_Click()";
+           disabled /> 
            
 		<input type = "text";
-           id   = "txtCommmand";
+           id   = "txtCommand";
            placeholder = "Enter Your Command"/>
           <br/>
+          <br/>
 		<input type = "button";
-			   value = "North"; 
-			   id    = "btnNorth"; 
-			   onclick = "btnNorth_Click();" /> 
+           value = "North"; 
+           id    = "btnNorth"; 
+           onclick = "dirNorth();" /> 
 			   
 		<input type = "button"; 
-			   value = "South";
-			   id    = "btnSouth"; 
-			   onclick = "btnSouth_Click();" />
+           value = "South";
+           id    = "btnSouth"; 
+           onclick = "dirSouth();" />
 			   
 		<input type = "button"; 
-			   value = "West";
-			   id    = "btnWest";
-			   onclick = "btnWest_Click();" />
+           value = "West";
+           id    = "btnWest";
+           onclick = "dirWest();" />
 		
 		<input type = "button"; 
-			   value = "East";
-			   id    = "btnEast"; 
-			   onclick = "btnEast_Click();" /> 
+           value = "East";
+           id    = "btnEast"; 
+           onclick = "dirEast();" /> 
 		<p> Score
 		<br>
 		<textarea rows="1" cols= "5" id="taScore" readonly></textarea>
