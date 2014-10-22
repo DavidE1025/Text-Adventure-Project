@@ -20,24 +20,28 @@
 	  var visitedLoc_3 = false;
 	  var visitedLoc_4 = false; 
 	  var visitedLoc_5 = false;
-	  var visitedLoc_6 = false; 
-  
+	  var visitedLoc_6 = false;
+	  var visitedLoc_7 = false;
+	  var visitedLoc_8 = false;
+	  var visitedLoc_9 = false;
+	  var visitedLoc_10 = false;
+	  var visitedLoc_11 = false; 
+    
 	//Display Text 
 	  function dispMsg(msg) { 
 			  var message = document.getElementById("taDisplay");  
 				    message.scrollTop = message.scrollHeight;
 			// Above found on http://stackoverflow.com/questions/7373081/how-to-have-a-textarea-to-keep-scrolled-to-the-bottom-when-updated
 				message.value += msg+"\n\n";
-		}	
+		}
+			
 		//Display Score
-		 
 		function dispScore(){ 
 			var targetScore = document.getElementById("taScore"); 
 				targetScore.value = score; 
-	  }
-	  
-	  //Score Counter
-	    
+	  } 
+
+	  //Score Counter  
 	  function scrCounter(){
           if (visitedLoc_0 === false && playerLoc === 0){ 
               visitedLoc_0 = true; 
@@ -73,23 +77,50 @@
               visitedLoc_6 = true; 
               score += 5 
               dispScore(); 
-          }         
-    }    
+          }  
+           if (visitedLoc_7 === false && playerLoc === 7){ 
+              visitedLoc_7 = true; 
+              score += 5 
+              dispScore(); 
+          }
+           if (visitedLoc_8 === false && playerLoc === 8){ 
+              visitedLoc_8 = true; 
+              score += 5 
+              dispScore(); 
+          }
+           if (visitedLoc_9 === false && playerLoc === 9){ 
+              visitedLoc_9 = true; 
+              score += 5 
+              dispScore(); 
+          }
+          if (visitedLoc_10 === false && playerLoc === 10){ 
+              visitedLoc_10 = true; 
+              score += 5 
+              dispScore(); 
+          }
+          if (visitedLoc_11 === false && playerLoc === 11){ 
+              visitedLoc_11 = true; 
+              score += 5 
+              dispScore(); 
+          }       
+    } 
+    
+    //Command Box Function    
     function btnGo_Click(){
         var targetCommand = document.getElementById("txtCommand");
         var userInput = targetCommand.value;
         userInput = userInput.toUpperCase();
         switch(userInput){
-          case 'N':
+          case "N":
             dirNorth();
           break;
-          case 'S':
+          case "S":
             dirSouth();
           break;
-          case 'W': 
+          case "W": 
             dirWest(); 
           break;
-          case 'E': 
+          case "E": 
             dirEast();
           break;
           default: 
@@ -98,8 +129,7 @@
     
     }
 
-	  //onload function 
-	  
+	  //onload function  
 	  function location_Onload() {
        switch(playerLoc){
           case 0: 
@@ -109,8 +139,7 @@
        }
     }
     
-    //Directional Functions         
-           
+    //Directional Functions                
 	  function dirNorth(){	  
 	     switch(playerLoc){
 	       case 1:
@@ -124,41 +153,59 @@
 				 break;
 				 case 4:  
 						playerLoc = 5;
-						scrCounter();  
+						scrCounter();
 						dispMsg("You walk north up the mountain and arrive at the summit. You can see the entire island. Past the bridge to the south of the beach you can see a mansion, on the other side of the mountain there is what looks to be a temple surrounded by a forest, and back the west you can see your ship."); 
 				 break;
 				 case 7:
-						playerLoc = 2; 
+						playerLoc = 2;
 						dispMsg("You head north back across the bridge the water river hasn't slowed a bit. The beach is to the north and the mansion back to the south.");
 				 break;
+				 case 8:   
+			        playerLoc = 7;
+					    dispMsg("You head north back outside of the mansion to the north is the bridge and further is the beach.");
+				 break;
+				 case 10:   
+			        playerLoc = 8;
+					    dispMsg("You walk north out of the bedroom back down the stairs onto the main level of the mansion. To the east down the stairs is the cellar, to the north is outside the mansion, and to the west is the kitchen."); 
+				 break; 
 				 default:   
 						dispMsg("Stop, you cannot go that way."); 
 		    }
 		}   
-	    function dirSouth(){	   
-			   switch(playerLoc){
-			       case 1: 
+	  function dirSouth(){	   
+			  switch(playerLoc){
+			      case 1: 
 			         playerLoc = 2;
-					     scrCounter(); 
+					     scrCounter();
 					     dispMsg("You reach a bridge, across the bridge in the distance you can see a mansion.");
-			       break;
-			       case 2: 
+			      break;
+			      case 2: 
 			         playerLoc = 7;
-					     scrCounter(); 
+					     scrCounter();
 					     dispMsg("You walk across the bridge the river underneath is running fast if you were to fall in it would be over. You have arrived at the mansion in the south. The front door is broken and the building looks abandoned."); 
-				     break;
-				     case 3:  
+				    break;
+				    case 7: 
+			         playerLoc = 8;
+					     scrCounter(); 
+					     dispMsg("You walk south into the rundown mansion. Further south up the stairs is the bedroom, to the east is down the stairs to the cellar, and to the west is the kitchen.");
+					  break;  
+				    case 3:  
 						   playerLoc = 1; 
 						   dispMsg("You walk back to the beach. There is a mountain to the east, a forest to the north, and a bridge leading to a mansion in the south. "); 
-					   break;
-					   case 5:  
+					  break;
+					  case 5:  
 						   playerLoc = 4; 
 						   dispMsg("You head south back down the mountian path. You arrive at the base of the mountain. The beach is to the west aand the cave to the east.");
-						 break;    
-					   default:  
+						break;
+						case 8:   
+			        playerLoc = 10;
+			        scrCounter();
+					    dispMsg("You head south up the stairs into the bedroom. There is a lantern hanging on the bed post and a skeleton laying in the burnt remains of a mattress.");
+					  break;      
+					  default:  
                dispMsg("Stop, you cannot go that way."); 
-		      }	
-		  } 
+		    }	
+		} 
 		function dirEast(){	   
 			  switch(playerLoc) { 
 			      case 0: 
@@ -175,6 +222,15 @@
 						  playerLoc = 6;
 						  scrCounter(); 
 						  dispMsg("You attempt to head into the cave but it is to dark to continue, you need some source of light.");					  
+					  break;
+					  case 8:
+						  playerLoc = 9;
+						  scrCounter();
+						  dispMsg("You walk east down the stairs into the cellar. Its hard to really see anything in this darkness."); 
+						break;
+						case 11:
+				      playerLoc = 8;
+				      dispMsg("You walk east out of the kitchen and back into the main room of the mansion. To the east down the stairs is the cellar, to the south up the stairs is the bedroom, and to the north is the outside of the mansion.");   
 					  break;
 					  default:  
 						  dispMsg("Stop, you cannot go that way.");	
@@ -194,21 +250,29 @@
 			        playerLoc = 4;
 					    dispMsg("The light is extremely bright after you walk back out of the cave. Back at the base of the mountain there is a path up the mountain to the north and back to the west is the beach."); 
 				    break;
+				    case 9:   
+			        playerLoc = 8;
+					    dispMsg("You walk west back the stairs onto the main floor of the mansion. To the south is the bedroom, to the north is back outside, to the west is the kitchen.");
+				    break;
+				    case 8:   
+			        playerLoc = 11;
+			        scrCounter();
+					    dispMsg("You walk east into the kitchen there is broken glass covering the whole floor and some flint on the counter and a couldron in the middle of the room.");
+					  break;  
 				    default: 
 					    dispMsg("Stop, you cannot go that way.");
 			  }		
 		}	
 
 	</script>
-	<body onload = "location_Onload()"; style = "text-align: center" >
-		<h1> The Adventures of Captain Something: Treasure on YAY Island v0.4 </h1>
+	<body onload = "location_Onload()"; style = "text-align: center">
+		<h1> The Adventures of Captain Dotis: Treasure on Ghost Island v0.4 </h1>
 		<textarea rows="20"  cols="60" id="taDisplay" readonly> </textarea>
 		<br>
 		<input type = "button"; 
            id   = "btnGo";
            value = "Go" ;
-           onclick = "btnGo_Click()";
-           disabled /> 
+           onclick = "btnGo_Click()";/> 
            
 		<input type = "text";
            id   = "txtCommand";
