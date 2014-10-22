@@ -220,8 +220,10 @@
     }    
     function locKitchen(){           
 				dispMsg("You walk into the kitchen there is broken glass covering the whole floor and some flint on the counter.");
-    }    
-
+    }
+    function locError(){
+        dispMsg("Stop, you cannot go that way.");
+    }
    
     //Location Caller            
     function locCall(){ 
@@ -301,7 +303,7 @@
 				 break; 
 				 default:
             btnDisabler();   
-						dispMsg("Stop, you cannot go that way."); 
+						locError(); 
 		    }
 		}   
 	  function dirSouth(){	   
@@ -342,7 +344,7 @@
 					  break;      
 					  default:  
                btnDisabler();
-               dispMsg("Stop, you cannot go that way."); 
+               locError();  
 		    }	
 		} 
 		function dirEast(){	   
@@ -378,7 +380,7 @@
 					  break;
 					  default:  
               btnDisabler();
-						  dispMsg("Stop, you cannot go that way.");	
+						  locError(); 	
 				}	
 		}	  	
 		function dirWest(){
@@ -411,7 +413,7 @@
 					  break;  
 				    default: 
               btnDisabler();
-					    dispMsg("Stop, you cannot go that way.");
+					    locError(); 
 			  }		
 		}	
 
